@@ -1,7 +1,5 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import LembreteLista from './LembreteLista'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -9,7 +7,9 @@ function App() {
   return (
     <div className='container mt-5'>
       <div className='row'>
-        <div className='col-sm-12 text center'>Hello, Lembretes</div>
+        <div className='col-12'>
+          <LembreteLista />
+        </div>
       </div>
     </div>
   )
