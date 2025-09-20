@@ -1,37 +1,48 @@
-import React, { useState } from "react";
+import React, { Component } from 'react'
+export class LembreteEntrada extends Component {
+  state = {
+    texto: ""
+  }
 
-export default function LembreteEntrada({ onAdd }) {
-  const [texto, setTexto] = useState("");
-
-  const handleSubmit = (e) => {
+  enviar_descricao_lembrete = (e) => {
     e.preventDefault();
-    const trimmed = texto.trim();
-    if (!trimmed) return;
+    const texto_tratado = this.state.texto.trim();
+    if (!texto_tratado) {
+      return
+    }
 
-    onAdd(trimmed);
-    setTexto("");
-  };
+    this.props.novo_lembrete(texto_tratado);
+    this.setState({
+      texto: ""
+    })
+  }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="mb-2">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Digite seu novo lembrete"
-          value={texto}
-          onChange={(e) => setTexto(e.target.value)}
-        />
-      </div>
-      <div>
-        <button
-          type="submit"
-          className="btn btn-primary w-100"
-          disabled={texto.trim() === ""}
-        >
-          Adicionar
-        </button>
-      </div>
-    </form>
-  );
+
+  render() {
+    return (
+      <form onSubmit={this.enviar_descricao_lembrete} className="mt-2">
+        <div className="mb-2">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Digite seu novo lembrete"
+            value={this.state.texto}
+            onChange={(e) => this.setState({
+              texto: e.target.value
+            })}
+          />
+        </div>
+        <div>
+          <button
+            type="submit"
+            className="mb-5 btn btn-primary w-100"
+          >
+            Adicionar
+          </button>
+        </div>
+      </form>
+    )
+  }
 }
+
+export default LembreteEntrada

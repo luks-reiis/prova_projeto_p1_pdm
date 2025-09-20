@@ -1,25 +1,33 @@
-import { useState } from 'react'
-import LembreteLista from './LembreteLista'
+import React from "react"
+import LembreteLista from './components/LembreteLista'
 import LembreteEntrada from "./components/LembreteEntrada";
+class App extends React.Component {
+  state = {
+    lista_lembretes: []
+  }
 
-function App() {
-  const [lembretes, setLembretes] = useState([]);
+  adicionar_lembrete = (texto) => {
+    const lembrete = {
+      descricao: texto,
+      favoritado: false
+    }
 
-  const handleAdd = (novo) => {
-    setLembretes((prev) => [novo, ...prev]);
-    console.log("Novo lembrete cadastrado:", novo);
-  };
-
-  return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col-12">
-          <LembreteLista />
-          <LembreteEntrada onAdd={handleAdd} />
+    this.setState({
+      lista_lembretes: [...this.state.lista_lembretes, lembrete]
+    });
+  }
+  render() {
+    return (
+      <div className="container mt-5">
+        <div className="row">
+          <div className="col-12">
+            <LembreteLista lista_lembretes={this.state.lista_lembretes} />
+            <LembreteEntrada novo_lembrete={this.adicionar_lembrete} />
+          </div>
         </div>
       </div>
-    </div>
-  );
+    )
+  }
 }
 
-export default App;
+export default App
