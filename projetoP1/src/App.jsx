@@ -1,18 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import LembreteEntrada from "./components/LembreteEntrada";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [lembretes, setLembretes] = useState([]);
+
+  const handleAdd = (novo) => {
+    setLembretes((prev) => [novo, ...prev]);
+    console.log("Novo lembrete cadastrado:", novo);
+  };
 
   return (
-    <div className='container mt-5'>
-      <div className='row'>
-        <div className='col-sm-12 text center'>Hello, Lembretes</div>
+    <div className="container mt-5">
+      <div className="row">
+        <div className="col-12">
+          <LembreteEntrada onAdd={handleAdd} />
+        </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
