@@ -25,6 +25,16 @@ class App extends React.Component {
     });
   }
 
+  alternar_favorito = (descricao) => {
+    this.setState({
+      lista_lembretes: this.state.lista_lembretes.map((lembrete) => 
+        lembrete.descricao === descricao 
+          ? { ...lembrete, favoritado: !lembrete.favoritado } 
+          : lembrete
+      )
+    });
+  }
+
 
   render() {
     return (
